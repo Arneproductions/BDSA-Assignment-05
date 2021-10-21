@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace GildedRose.Console
+namespace GildedRose
 {
     public class Program
     {
