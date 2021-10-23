@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace GildedRose.Console
+namespace GildedRose
 {
     public class Program
     {
@@ -47,13 +47,13 @@ namespace GildedRose.Console
 
             for (var i = 0; i < 31; i++)
             {
-                System.Console.WriteLine("-------- day " + i + " --------");
-                System.Console.WriteLine("name, sellIn, quality");
+                Console.WriteLine("-------- day " + i + " --------");
+                Console.WriteLine("name, sellIn, quality");
                 for (var j = 0; j < app.Items.Count; j++)
                 {
-                    System.Console.WriteLine(app.Items[j].Name + ", " + app.Items[j].SellIn + ", " + app.Items[j].Quality);
+                    Console.WriteLine(app.Items[j].Name + ", " + app.Items[j].SellIn + ", " + app.Items[j].Quality);
                 }
-                System.Console.WriteLine("");
+                Console.WriteLine("");
                 app.UpdateQuality();
             }
         }

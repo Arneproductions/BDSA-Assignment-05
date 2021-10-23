@@ -1,4 +1,4 @@
-﻿﻿using GildedRose.Console;
+﻿﻿using GildedRose;
 using System.Collections.Generic;
 using Xunit;
 

@@ -1,8 +1,6 @@
 using System;
 
-using System;
-
-namespace GildedRose.Console
+namespace GildedRose
 {
     public class Item
     {
