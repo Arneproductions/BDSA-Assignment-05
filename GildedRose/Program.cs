@@ -138,7 +138,6 @@ namespace GildedRose
                 }
             }
         }
-
     }
 
     
