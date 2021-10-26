@@ -14,11 +14,11 @@ namespace GildedRose
 
         public void UpdateQuality()
         {
-            if(QualityAssesser == null)
+            if (QualityAssesser == null)
                 throw new NullReferenceException("QualityAssesser is not set!");
 
             Quality = QualityAssesser.AssessQuality(Quality, SellIn);
-            SellIn --;
+            SellIn--;
         }
     }
 }
