@@ -18,7 +18,7 @@ namespace GildedRose
                 throw new NullReferenceException("QualityAssesser is not set!");
 
             Quality = QualityAssesser.AssessQuality(Quality, SellIn);
-            SellIn --;
+            SellIn--;
         }
     }
 }
