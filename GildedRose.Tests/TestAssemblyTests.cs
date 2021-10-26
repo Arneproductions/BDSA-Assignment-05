@@ -13,7 +13,7 @@ namespace GildedRose.Tests
             { new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1), (0, -2))) }, 6 },
             { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80, QualityAssesser = new MinMaxAssessment(80, 80) }, 80 },
             { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2), (0, int.MinValue))) }, 21 },
-            { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) }, 5 }
+            { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -2), (0, -4))) }, 4 }
         };
 
         private Program _p;
@@ -31,7 +31,7 @@ namespace GildedRose.Tests
             _elixir = new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1), (0, -2))) };
             _sulfuras = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80, QualityAssesser = new MinMaxAssessment(80, 80)};
             _backstagePass = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2), (0, int.MinValue))) };
-            _conjured = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) };
+            _conjured = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -2), (0, -4))) };
             
             _p = new Program();
             _p.Items = new List<Item>() { _vest, _brie, _elixir, _sulfuras, _backstagePass, _conjured };
@@ -166,6 +166,23 @@ namespace GildedRose.Tests
             // The quality drops to 0 after the concert
             _p.UpdateQuality();
             Assert.Equal(0, _backstagePass.Quality);
+        }
+
+        [Fact]
+        public void Conjured_degradeTwiceAsFastWhenSellInAbove0_QualityIs4()
+        {
+            _conjured.UpdateQuality();
+
+            Assert.Equal(4, _conjured.Quality);
+        }
+
+        [Fact]
+        public void Conjured_degradeWith4WhenSellInIs0OrUnder_QualityIs4()
+        {
+            _conjured.SellIn = 0;
+            _conjured.UpdateQuality();
+
+            Assert.Equal(2, _conjured.Quality);
         }
     }
 }
