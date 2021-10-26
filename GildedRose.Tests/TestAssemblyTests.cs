@@ -12,7 +12,7 @@ namespace GildedRose.Tests
             { new Item { Name = "Aged Brie", SellIn = 2, Quality = 0, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, 1), (0, 2))) }, 1 },
             { new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1), (0, -2))) }, 6 },
             { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80, QualityAssesser = new MinMaxAssessment(80, 80) }, 80 },
-            { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2))) }, 21 },
+            { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2), (0, int.MinValue))) }, 21 },
             { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) }, 5 }
         };
 
@@ -30,7 +30,7 @@ namespace GildedRose.Tests
             _brie = new Item { Name = "Aged Brie", SellIn = 2, Quality = 0, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, 1), (0, 2))) };
             _elixir = new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1), (0, -2))) };
             _sulfuras = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80, QualityAssesser = new MinMaxAssessment(80, 80)};
-            _backstagePass = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2))) };
+            _backstagePass = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2), (0, int.MinValue))) };
             _conjured = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) };
             
             _p = new Program();
