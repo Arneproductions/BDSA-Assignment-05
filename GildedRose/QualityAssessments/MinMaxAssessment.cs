@@ -1,6 +1,6 @@
 using System;
 
-namespace GildedRose
+namespace GildedRose.QualityAssessments
 {
     public class MinMaxAssessment : IQualityAssessment
     {
@@ -12,6 +12,7 @@ namespace GildedRose
         {
             _min = min;
             _max = max;
+            _qualityAssessment = qualityAssessment;
         }
 
         public int AssessQuality(in int currentQuality, in int currentSellIn)

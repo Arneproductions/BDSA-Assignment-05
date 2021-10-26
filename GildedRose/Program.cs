@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using GildedRose.QualityAssessments;
 
 namespace GildedRose
 {
@@ -27,21 +28,21 @@ namespace GildedRose
                         Name = "Backstage passes to a TAFKAL80ETC concert",
                         SellIn = 15,
                         Quality = 20,
-                        QualityAssesser = new MinMaxAssessment(0, 50)
+                        QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment())
                     },
                     new Item
                     {
                         Name = "Backstage passes to a TAFKAL80ETC concert",
                         SellIn = 10,
                         Quality = 49,
-                        QualityAssesser = new MinMaxAssessment(0, 50)
+                        QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment())
                     },
                     new Item
                     {
                         Name = "Backstage passes to a TAFKAL80ETC concert",
                         SellIn = 5,
                         Quality = 49,
-                        QualityAssesser = new MinMaxAssessment(0, 50)
+                        QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment())
                     },
                     // this conjured item does not work properly yet
                     new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50) }

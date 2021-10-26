@@ -1,4 +1,5 @@
 ﻿﻿using GildedRose;
+using GildedRose.QualityAssessments;
 using System.Collections.Generic;
 using Xunit;
 
@@ -7,12 +8,12 @@ namespace GildedRose.Tests
     public class TestAssemblyTests
     {
         public static TheoryData<Item, int> QualityUpdateTestData => new TheoryData<Item, int> {
-            { new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20 }, 19 },
-            { new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 }, 1 },
-            { new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7 }, 6 },
-            { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 }, 80 },
-            { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 }, 21 },
-            { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6 }, 5 }
+            { new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) }, 19 },
+            { new Item { Name = "Aged Brie", SellIn = 2, Quality = 0, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) }, 1 },
+            { new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) }, 6 },
+            { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80, QualityAssesser = new MinMaxAssessment(80, 80) }, 80 },
+            { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2))) }, 21 },
+            { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) }, 5 }
         };
 
         private Item _vest;
@@ -24,12 +25,12 @@ namespace GildedRose.Tests
 
         public TestAssemblyTests()
         {
-            _vest = new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20 };
-            _brie = new Item { Name = "Aged Brie", SellIn = 2, Quality = 0, QualityAssesser = new MinMaxAssessment(0, 50) };
-            _elixir = new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7 };
-            _sulfuras = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 };
-            _backstagePass = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50) };
-            _conjured = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6 };
+            _vest = new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) };
+            _brie = new Item { Name = "Aged Brie", SellIn = 2, Quality = 0, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) };
+            _elixir = new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) };
+            _sulfuras = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80, QualityAssesser = new MinMaxAssessment(80, 80)};
+            _backstagePass = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((50, 1), (5, 3), (10, 2))) };
+            _conjured = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6, QualityAssesser = new MinMaxAssessment(0, 50, new IncreaseAssessment((int.MaxValue, -1))) };
         }
 
         [Theory]
@@ -120,7 +121,6 @@ namespace GildedRose.Tests
             //Then
             foreach (var item in p.Items)
             {
-                Assert.Equal(10, item.SellIn);
                 Assert.Equal(80, item.Quality);
             }
         }
