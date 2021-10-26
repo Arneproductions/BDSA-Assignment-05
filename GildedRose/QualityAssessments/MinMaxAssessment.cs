@@ -6,8 +6,9 @@ namespace GildedRose
     {
         private readonly int _min;
         private readonly int _max;
+        private readonly IQualityAssessment _qualityAssessment;
 
-        public MinMaxAssessment(int min, int max)
+        public MinMaxAssessment(int min, int max, IQualityAssessment qualityAssessment = null)
         {
             _min = min;
             _max = max;
@@ -15,13 +16,15 @@ namespace GildedRose
 
         public int AssessQuality(in int currentQuality, in int currentSellIn)
         {
-            if(currentQuality > _max)
+            int quality = _qualityAssessment != null ? _qualityAssessment.AssessQuality(currentQuality, currentSellIn) : currentQuality;
+
+            if(quality > _max)
                 return _max;
 
-            if(currentQuality < _min)
+            if(quality < _min)
                 return _min;
 
-            return currentQuality;
+            return quality;
         }
     }
 }
